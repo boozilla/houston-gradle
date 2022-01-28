@@ -1,0 +1,56 @@
+plugins {
+    id 'idea'
+    id 'java'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+    id "com.google.protobuf" version "0.8.17"
+}
+
+group 'boozill.houston'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.18.1'
+    }
+
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.44.0'
+        }
+    }
+
+    generateProtoTasks {
+        all()*.plugins { grpc {} }
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    implementation 'io.grpc:grpc-all:1.44.0'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+gradlePlugin {
+    plugins {
+        houston {
+            id = 'boozilla.houston.gradle'
+            implementationClass = 'boozilla.houston.gradle.HoustonPlugin'
+        }
+    }
+}
