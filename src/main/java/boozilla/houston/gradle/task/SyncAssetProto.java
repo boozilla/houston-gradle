@@ -38,6 +38,7 @@ public class SyncAssetProto extends DefaultTask {
 
         final var channel = NettyChannelBuilder.forAddress(server.getHostname(), server.getPort())
                 .intercept(MetadataUtils.newAttachHeadersInterceptor(metadata))
+                .negotiationType(server.getNegotiationType())
                 .negotiationType(NegotiationType.PLAINTEXT)
                 .build();
 

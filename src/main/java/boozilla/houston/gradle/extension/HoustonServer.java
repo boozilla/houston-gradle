@@ -1,5 +1,6 @@
 package boozilla.houston.gradle.extension;
 
+import io.grpc.netty.NegotiationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ public class HoustonServer {
     private int port;
     private String clientId;
     private String clientSecret;
+    private NegotiationType negotiationType;
 
     @Inject
     public HoustonServer(final String name)
