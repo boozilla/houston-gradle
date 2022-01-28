@@ -49,7 +49,7 @@ test {
 gradlePlugin {
     plugins {
         houston {
-            id = 'boozilla.houston'
+            id = 'io.github.Boozilla.houston'
             implementationClass = 'boozilla.houston.gradle.HoustonPlugin'
         }
     }
@@ -57,7 +57,7 @@ gradlePlugin {
 
 pluginBundle {
     mavenCoordinates {
-        groupId = "boozilla.houston"
+        groupId = "io.github.Boozilla.houston"
         artifactId = "houston-gradle-plugin"
         version = "1.0.1"
     }
