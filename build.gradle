@@ -2,7 +2,7 @@ plugins {
     id 'idea'
     id 'java'
     id 'java-gradle-plugin'
-    id 'maven-publish'
+    id "com.gradle.plugin-publish" version "0.20.0"
     id "com.google.protobuf" version "0.8.17"
 }
 
@@ -49,8 +49,28 @@ test {
 gradlePlugin {
     plugins {
         houston {
-            id = 'boozilla.houston.gradle'
+            id = 'boozilla.houston'
             implementationClass = 'boozilla.houston.gradle.HoustonPlugin'
+        }
+    }
+}
+
+pluginBundle {
+    mavenCoordinates {
+        groupId = "boozilla.houston"
+        artifactId = "houston-gradle-plugin"
+        version = "1.0.0"
+    }
+
+    website = 'https://github.com/Boozilla/houston-gradle'
+    vcsUrl = 'https://github.com/Boozilla/houston-gradle'
+
+    description = 'It is a protobuf structure synchronization helper plugin that works with the Houston asset server'
+
+    plugins {
+        houston {
+            displayName = 'Houston asset structure sync plugin'
+            tags = ['houston', 'asset', 'sync']
         }
     }
 }
