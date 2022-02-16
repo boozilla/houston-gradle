@@ -1,7 +1,7 @@
 package boozilla.houston.gradle.task;
 
-import boozilla.houston.AdminGrpc;
-import boozilla.houston.AdminService;
+import boozilla.houston.PluginGrpc;
+import boozilla.houston.PluginService;
 import boozilla.houston.RuntimeSideOuterClass;
 import boozilla.houston.gradle.extension.HoustonPluginExtension;
 import io.grpc.Metadata;
@@ -44,8 +44,8 @@ public class SyncAssetProto extends DefaultTask {
 
         try
         {
-            final var adminStub = AdminGrpc.newBlockingStub(channel);
-            final var protobufResp = adminStub.protobuf(AdminService.AdminProtobufRequest.newBuilder()
+            final var pluginSub = PluginGrpc.newBlockingStub(channel);
+            final var protobufResp = pluginSub.protobuf(PluginService.PluginProtobufRequest.newBuilder()
                     .setSide(RuntimeSideOuterClass.RuntimeSide.valueOf(server.getRuntimeSide().toUpperCase()))
                     .build());
 
