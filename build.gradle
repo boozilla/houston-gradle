@@ -59,7 +59,7 @@ pluginBundle {
     mavenCoordinates {
         groupId = "io.github.Boozilla.houston"
         artifactId = "houston-gradle-plugin"
-        version = "1.0.1"
+        version = project.version
     }
 
     website = 'https://github.com/Boozilla/houston-gradle'
