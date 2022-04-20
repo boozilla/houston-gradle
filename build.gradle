@@ -15,12 +15,26 @@ repositories {
 
 protobuf {
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.18.1'
+        if(osdetector.os == "osx")
+        {
+            artifact = 'com.google.protobuf:protoc:3.18.1:osx-x86_64'
+        }
+        else
+        {
+            artifact = 'com.google.protobuf:protoc:3.18.1'
+        }
     }
 
     plugins {
         grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.44.0'
+            if(osdetector.os == "osx")
+            {
+                artifact = 'io.grpc:protoc-gen-grpc-java:1.44.0:osx-x86_64'
+            }
+            else
+            {
+                artifact = 'io.grpc:protoc-gen-grpc-java:1.44.0'
+            }
         }
     }
 
