@@ -33,16 +33,16 @@ houston {
 
 Below is a detailed description of each setting.
 
-| Name            | Description                                                                                                           |
-|-----------------|-----------------------------------------------------------------------------------------------------------------------|
-| runtimeSide     | The scope value of the asset you want to sync. The values `CLIENT` and `SERVER` are allowed.                          |
-| hostname        | The hostname of the Houston Asset Server you want to synchronize.                                                     |
-| port            | port of Houston Asset Server.                                                                                         |
-| clientId        | This is the Client ID with Admin privileges set in Houston Asset Server.                                              |
-| clientSecret    | Client Secret with Admin privileges                                                                                   |
-| path            | This is where the synced proto schema files are stored. `Base path` is `Project root`                                 |
-| truncate        | Whether to always empty and save .proto files to the location where proto schema files are stored. Default is `false` |
-| negotiationType | Server transport negotiation type. `io.grpc.netty.NegotiationType`                                                    |
+| Name         | Description                                                                                                           |
+|--------------|-----------------------------------------------------------------------------------------------------------------------|
+| runtimeSide  | The scope value of the asset you want to sync. The values `CLIENT` and `SERVER` are allowed.                          |
+| hostname     | The hostname of the Houston Asset Server you want to synchronize.                                                     |
+| port         | port of Houston Asset Server.                                                                                         |
+| clientId     | This is the Client ID with Admin privileges set in Houston Asset Server.                                              |
+| clientSecret | Client Secret with Admin privileges                                                                                   |
+| path         | This is where the synced proto schema files are stored. `Base path` is `Project root`                                 |
+| truncate     | Whether to always empty and save .proto files to the location where proto schema files are stored. Default is `false` |
+| tls          | Whether to use TLS to communicate with the server                                                                     |
 
 ## Task definition
 First, import the `SyncAssetProto` class in the build.gradle file.

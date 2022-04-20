@@ -4,6 +4,7 @@ import boozilla.houston.PluginGrpc;
 import boozilla.houston.PluginService;
 import boozilla.houston.RuntimeSideOuterClass;
 import boozilla.houston.gradle.extension.HoustonPluginExtension;
+import io.grpc.ManagedChannelBuilder;
 import io.grpc.Metadata;
 import io.grpc.netty.NegotiationType;
 import io.grpc.netty.NettyChannelBuilder;
@@ -36,9 +37,10 @@ public class SyncAssetProto extends DefaultTask {
         metadata.put(Metadata.Key.of("x-houston-client-id", Metadata.ASCII_STRING_MARSHALLER), server.getClientId());
         metadata.put(Metadata.Key.of("x-houston-client-secret", Metadata.ASCII_STRING_MARSHALLER), server.getClientSecret());
 
-        final var channel = NettyChannelBuilder.forAddress(server.getHostname(), server.getPort())
+        final var channel = server.isTls() ? ManagedChannelBuilder.forAddress(server.getHostname(), server.getPort())
                 .intercept(MetadataUtils.newAttachHeadersInterceptor(metadata))
-                .negotiationType(server.getNegotiationType())
+                .build() : NettyChannelBuilder.forAddress(server.getHostname(), server.getPort())
+                .intercept(MetadataUtils.newAttachHeadersInterceptor(metadata))
                 .negotiationType(NegotiationType.PLAINTEXT)
                 .build();
 
