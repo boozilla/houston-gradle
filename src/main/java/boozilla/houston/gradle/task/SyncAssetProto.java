@@ -1,8 +1,6 @@
 package boozilla.houston.gradle.task;
 
-import boozilla.houston.PluginGrpc;
-import boozilla.houston.PluginService;
-import boozilla.houston.RuntimeSideOuterClass;
+import boozilla.houston.*;
 import boozilla.houston.gradle.extension.HoustonPluginExtension;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.Metadata;
@@ -47,8 +45,8 @@ public class SyncAssetProto extends DefaultTask {
         try
         {
             final var pluginSub = PluginGrpc.newBlockingStub(channel);
-            final var protobufResp = pluginSub.protobuf(PluginService.PluginProtobufRequest.newBuilder()
-                    .setSide(RuntimeSideOuterClass.RuntimeSide.valueOf(server.getRuntimeSide().toUpperCase()))
+            final var protobufResp = pluginSub.protobuf(PluginProtobufRequest.newBuilder()
+                    .setSide(RuntimeSide.valueOf(server.getRuntimeSide().toUpperCase()))
                     .build());
 
             final var downloadPath = Path.of(getProject().getProjectDir().getAbsolutePath(), houstonExt.getPath());
