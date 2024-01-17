@@ -1,4 +1,4 @@
-houston Asset Server Gradle Plugin is a convenient tool for automating synchronization through the build script. It facilitates the extraction of schema data in protobuf format from an Excel file uploaded to the 'houston Asset Server.'
+[houston Asset Server](https://github.com/boozilla/houston) Gradle Plugin is a convenient tool for automating synchronization through the build script. It facilitates the extraction of schema data in protobuf format from an Excel file uploaded to the 'houston Asset Server.'
 
 ## Getting Started
 
