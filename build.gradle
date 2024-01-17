@@ -60,8 +60,7 @@ gradlePlugin {
 
     plugins {
         houston {
-            group = 'io.github.boozilla.houston'
-            id = "${group}.houston-gradle"
+            id = "io.github.boozilla.houston"
             displayName = 'houston'
             description = 'This is a plugin that helps work with the houston server'
             implementationClass = 'boozilla.houston.gradle.HoustonPlugin'
