@@ -1,78 +1,101 @@
 plugins {
-    id 'idea'
-    id 'java'
-    id 'java-gradle-plugin'
-    id "com.gradle.plugin-publish" version "0.20.0"
-    id "com.google.protobuf" version "0.8.17"
+    id 'java-library'
+    id 'com.google.protobuf'
+    id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
-group 'io.github.Boozilla.houston'
-version '1.1.0'
+group = rootProject.group
+version = rootProject.version
+
+sourceSets {
+    main {
+        proto {
+            srcDir rootProject.sourceSets.main.proto.srcDirs
+        }
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${protobufVersion}"
+    }
+
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+        }
+        reactor {
+            artifact = "com.salesforce.servicelibs:reactor-grpc:${reactorGrpcVersion}"
+        }
+    }
+
+    generateProtoTasks {
+        ofSourceSet("main")*.plugins {
+            grpc {}
+            reactor {}
+        }
+    }
+}
+
+tasks.every { task ->
+    task.dependsOn ':extractProto'
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+javadoc {
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+
+    options.addStringOption('Xdoclint:none', '-quiet')
+}
+
+gradlePlugin {
+    website = 'https://github.com/boozilla/houston'
+    vcsUrl = 'https://github.com/boozilla/houston.git'
+
+    plugins {
+        houston {
+            group = 'io.github.boozilla'
+            id = "${group}.houston"
+            displayName = 'houston'
+            description = 'This is a plugin that helps work with the houston server'
+            implementationClass = 'boozilla.houston.gradle.HoustonPlugin'
+
+            tags.set(['houston', 'asset', 'sync'])
+        }
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
-protobuf {
-    protoc {
-        protoc {
-            artifact = "com.google.protobuf:protoc:3.21.5"
-        }
-    }
-
-    plugins {
-        grpc {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.48.0"
-        }
-    }
-
-    generateProtoTasks {
-        all()*.plugins { grpc {} }
-    }
-}
-
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    implementation 'io.grpc:grpc-all:1.48.0'
-    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    implementation project(':api')
 
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    testCompileOnly 'org.projectlombok:lombok:1.18.22'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    implementation "io.projectreactor:reactor-core:${reactorVersion}"
+    implementation "io.projectreactor:reactor-tools:${reactorVersion}"
+
+    runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
+    implementation "io.grpc:grpc-api:${grpcVersion}"
+    implementation "io.grpc:grpc-stub:${grpcVersion}"
+    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
+    implementation "com.google.protobuf:protobuf-java:${protobufVersion}"
+    implementation "com.salesforce.servicelibs:reactor-grpc-stub:${reactorGrpcVersion}"
+
+    implementation "org.springframework:spring-core:${springVersion}"
+
+    implementation "dev.gradleplugins:gradle-api:8.4"
 }
 
 test {
     useJUnitPlatform()
-}
-
-gradlePlugin {
-    plugins {
-        houston {
-            id = 'io.github.Boozilla.houston'
-            implementationClass = 'boozilla.houston.gradle.HoustonPlugin'
-        }
-    }
-}
-
-pluginBundle {
-    mavenCoordinates {
-        groupId = "io.github.Boozilla.houston"
-        artifactId = "houston-gradle"
-        version = project.version
-    }
-
-    website = 'https://github.com/Boozilla/houston-gradle'
-    vcsUrl = 'https://github.com/Boozilla/houston-gradle'
-
-    description = 'It is a protobuf structure synchronization helper plugin that works with the Houston asset server'
-
-    plugins {
-        houston {
-            displayName = 'Houston asset structure sync plugin'
-            tags = ['houston', 'asset', 'sync']
-        }
-    }
 }
