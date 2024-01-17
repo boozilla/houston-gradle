@@ -50,6 +50,10 @@ Below is a detailed explanation of each setting:
 | path  | This is where the synced proto schema files are stored. The default base path is `'src/main/proto/asset'`. |
 | tls   | Whether to use TLS to communicate with the server.                                                         |
 
+### Token Generation
+
+To generate the token with Admin privileges, please refer to the [Generate admin token documentation](https://github.com/boozilla/houston/wiki/Generate-admin-token) for detailed instructions.
+
 ### Usage
 
 Once configured, you can utilize the plugin to automate synchronization tasks. Specific tasks and commands will depend on your project's requirements and the plugin's capabilities.
