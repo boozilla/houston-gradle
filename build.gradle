@@ -93,7 +93,7 @@ dependencies {
 
     implementation "org.springframework:spring-core:${springVersion}"
 
-    implementation "dev.gradleplugins:gradle-api:8.4"
+    implementation "dev.gradleplugins:gradle-api:${gradleApiVersion}"
 }
 
 test {
