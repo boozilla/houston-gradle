@@ -8,7 +8,7 @@ Add the houston Gradle Plugin to your project by including the following code in
 
 ```groovy
 plugins {
-    id 'io.github.boozilla.houston' version '1.0.2'
+    id 'io.github.boozilla.houston' version '1.0.4'
 }
 ```
 
@@ -19,21 +19,21 @@ Configure the houston plugin in your `build.gradle` to suit your project's needs
 ```groovy
 houston {
     dev {
-        scope 'SERVER'
-        url 'dev-houston.hostname.com:443'
-        tls true
-        path 'src/main/proto/asset'
-        token '''
+        scope = 'SERVER'
+        url = 'dev-houston.hostname.com:443'
+        tls = true
+        path = 'src/main/proto/asset'
+        token = '''
             [REDACTED]
             '''
     }
     
     prod {
-        scope 'CLIENT'
-        url 'prod-houston.hostname.com:443'
-        tls true
-        path 'src/main/proto/asset'
-        token '''
+        scope = 'CLIENT'
+        url = 'prod-houston.hostname.com:443'
+        tls = true
+        path = 'src/main/proto/asset'
+        token = '''
             [REDACTED]
             '''
     }
