@@ -104,7 +104,7 @@ public abstract class RunVerifier extends DefaultTask {
 
         Flux.fromStream(verifierClassNames)
                 .flatMap(name -> run(name, classes.get(name)))
-                .doOnNext(response -> System.out.println(response.getStacktrace()))
+                .doOnNext(response -> System.out.println(response.getOutput()))
                 .blockLast();
     }
 
