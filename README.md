@@ -8,7 +8,7 @@ Add the houston Gradle Plugin to your project by including the following code in
 
 ```groovy
 plugins {
-    id 'io.github.boozilla.houston' version '1.0.4'
+    id 'io.github.boozilla.houston' version '1.0.5'
 }
 ```
 
@@ -26,16 +26,7 @@ houston {
         token = '''
             [REDACTED]
             '''
-    }
-    
-    prod {
-        scope = 'CLIENT'
-        url = 'prod-houston.hostname.com:443'
-        tls = true
-        path = 'src/main/proto/asset'
-        token = '''
-            [REDACTED]
-            '''
+        verifier = project(':your-verifier-module')
     }
 }
 ```
