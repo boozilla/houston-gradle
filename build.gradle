@@ -80,25 +80,27 @@ repositories {
 }
 
 dependencies {
+    // BOM
+    implementation platform(libs.reactor.bom)
+    implementation platform(libs.grpc.bom)
+    implementation platform(libs.spring.boot.dependencies)
+
     testImplementation platform(libs.junit.bom)
     testImplementation libs.junit.jupiter
 
     implementation project(':api')
 
-    implementation libs.reactor.core
     implementation libs.reactor.tools
 
     runtimeOnly libs.grpc.netty.shaded
     implementation libs.grpc.api
     implementation libs.grpc.stub
     implementation libs.grpc.protobuf
-    implementation libs.protobuf.java
     implementation libs.reactor.grpc.stub
 
     implementation libs.spring.core
 
     implementation libs.gradle.api
-
 }
 
 test {
