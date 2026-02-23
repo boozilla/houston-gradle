@@ -10,7 +10,7 @@ Add the houston Gradle Plugin to your project by including the following code in
 
 ```groovy
 plugins {
-    id 'io.github.boozilla.houston' version '1.2.2'
+    id 'io.github.boozilla.houston' version '1.2.3'
 }
 ```
 
