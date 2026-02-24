@@ -83,7 +83,7 @@ dependencies {
     // BOM
     implementation platform(libs.reactor.bom)
     implementation platform(libs.grpc.bom)
-    implementation platform(libs.spring.boot.dependencies)
+    implementation platform(libs.spring.boot4.dependencies)
 
     testImplementation platform(libs.junit.bom)
     testImplementation libs.junit.jupiter
