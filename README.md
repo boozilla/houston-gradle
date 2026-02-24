@@ -10,7 +10,7 @@ Add the houston Gradle Plugin to your project by including the following code in
 
 ```groovy
 plugins {
-    id 'io.github.boozilla.houston' version '1.2.5'
+    id 'io.github.boozilla.houston' version '1.3.0'
 }
 ```
 
@@ -79,6 +79,14 @@ Execute the `dev` environment RunVerifier Task:
 
 This task provides a way to test and execute the constraints defined in `AssetSheetConstraints` using the houston
 server.
+
+#### Breaking Changes in `AssetSheetConstraints`
+
+- `targetSheetName()` has been replaced by `Set<String> targetSheetNames()`.
+- Return `Set.of()` to trigger on all updated sheets.
+- Return multiple sheet names (for example `Set.of("Character", "Item")`) to trigger a single constraint from
+  multiple tables.
+- During one `/upload` session, a matching constraint runs only once even when multiple target sheets are updated.
 
 ### SyncSchema Task
 
