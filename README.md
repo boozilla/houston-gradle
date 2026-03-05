@@ -8,9 +8,11 @@ file uploaded to the 'houston Asset Server.'
 
 Add the houston Gradle Plugin to your project by including the following code in your `build.gradle` file:
 
+Replace `<HOUSTON_VERSION>` with the houston release version you want to use.
+
 ```groovy
 plugins {
-    id 'io.github.boozilla.houston' version '1.3.9'
+    id 'io.github.boozilla.houston' version '<HOUSTON_VERSION>'
 }
 ```
 
